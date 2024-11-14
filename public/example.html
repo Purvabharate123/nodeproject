@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Shop</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="#">Grocery Shop</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#categories">Categories</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <div class="nav-item cart text-white">
+                        Cart: <span id="cart-count">0</span> items
+                    </div>
+                    <div class="nav-item total text-white">
+                        Total: $<span id="total-price">0</span>
+                    </div>
+                    <button id="payment-button" class="btn btn-light ml-3" data-toggle="modal" data-target="#paymentModal">Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner Section -->
+    <header class="banner text-white text-center py-5">
+        <div class="container">
+            <h1>Welcome to the Grocery Shop!</h1>
+            <p>Find the freshest produce and best deals here.</p>
+            <a href="#categories" class="btn btn-light btn-lg">Shop Now</a>
+        </div>
+    </header>
+
+    <section class="container mt-4">
+        <!-- Fruits Category -->
+        <div class="category mb-5" id="categories">
+            <h2 class="text-primary">Fruits</h2>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <img src="apple.jpg" class="card-img-top" alt="Apple">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Apple</h5>
+                            <p class="card-text">$2.00</p>
+                            <button class="btn btn-success" onclick="addToCart(2)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <img src="banana.jpg" class="card-img-top" alt="Banana">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Banana</h5>
+                            <p class="card-text">$1.50</p>
+                            <button class="btn btn-success" onclick="addToCart(1.5)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dairy Category -->
+        <div class="category mb-5">
+            <h2 class="text-primary">Dairy</h2>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <img src="milk.jpg" class="card-img-top" alt="Milk">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Milk</h5>
+                            <p class="card-text">$3.00</p>
+                            <button class="btn btn-success" onclick="addToCart(3)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <img src="cheese.jpg" class="card-img-top" alt="Cheese">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Cheese</h5>
+                            <p class="card-text">$5.00</p>
+                            <button class="btn btn-success" onclick="addToCart(5)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vegetables Category -->
+        <div class="category mb-5">
+            <h2 class="text-primary">Vegetables</h2>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <img src="broccoli.jpg" class="card-img-top" alt="Broccoli">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Broccoli</h5>
+                            <p class="card-text">$2.50</p>
+                            <button class="btn btn-success" onclick="addToCart(2.5)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <img src="carrot.jpg" class="card-img-top" alt="Carrot">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Carrot</h5>
+                            <p class="card-text">$1.00</p>
+                            <button class="btn btn-success" onclick="addToCart(1)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">Payment Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="payment-form">
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" class="form-control" id="card-number" placeholder="Enter card number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-expiry">Expiration Date</label>
+                            <input type="text" class="form-control" id="card-expiry" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-cvc">CVC</label>
+                            <input type="text" class="form-control" id="card-cvc" placeholder="Enter CVC" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+let cartCount = 0;
+let totalPrice = 0;
+
+function addToCart(price) {
+    cartCount += 1;
+    totalPrice += price;
+    document.getElementById('cart-count').innerText = cartCount;
+    document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+}
+
+// Handle payment button click
+document.getElementById('payment-button').addEventListener('click', function() {
+    if (totalPrice > 0) {
+        $('#paymentModal').modal('show');
+    } else {
+        alert('Your cart is empty. Add items to the cart before proceeding to payment.');
+    }
+});
+
+// Handle payment form submission
+document.getElementById('payment-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const cardNumber = document.getElementById('card-number').value;
+    const cardExpiry = document.getElementById('card-expiry').value;
+    const cardCVC = document.getElementById('card-cvc').value;
+
+    if (cardNumber && cardExpiry && cardCVC) {
+        alert(`Payment submitted successfully! Total amount: $${totalPrice.toFixed(2)}`);
+        // Clear cart and close modal
+        cartCount = 0;
+        totalPrice = 0;
+        document.getElementById('cart-count').innerText = cartCount;
+        document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+        $('#paymentModal').modal('hide');
+    } else {
+        alert('Please fill in all payment details.');
+    }
+});

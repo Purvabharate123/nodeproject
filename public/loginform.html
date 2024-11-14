@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background: url(login.jpg);
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        form {
+            background: #fff;
+            padding: 90px;
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px; /* Adjusted width for login form */
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #131111;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid black;
+            border-radius: 4px;
+            box-sizing: content-box;
+        }
+
+        input[type="submit"] {
+            background-color: #5cb85c;
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+
+        .error {
+            font-size: 0.9em;
+            color: red;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .success {
+            font-size: 1em;
+            color: green;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login Form</h2>
+        <div class="form-wrapper">
+            <form action="http://localhost:5000/user/login" method="post" id="loginForm" onsubmit="return validateForm()">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email"><br>
+                <span id="emailError" class="error"></span><br>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"><br>
+                <span id="passwordError" class="error"></span><br>
+
+                <input type="submit" value="Login">
+            </form>
+        </div>
+        <p id="successMsg" class="success"></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Clear previous messages
+            document.getElementById("emailError").innerHTML = "";
+            document.getElementById("passwordError").innerHTML = "";
+            document.getElementById("successMsg").innerHTML = "";
+
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let isValid = true;
+
+            // Email validation
+            if (email === "") {
+                document.getElementById("emailError").innerHTML = "Email is required";
+                isValid = false;
+            }
+
+            // Password validation
+            if (password === "") {
+                document.getElementById("passwordError").innerHTML = "Password is required";
+                isValid = false;
+            } else if (password.length < 6) {
+                document.getElementById("passwordError").innerHTML = "Password must be at least 6 characters long";
+                isValid = false;
+            }
+
+            // Check stored user details
+            if (isValid) {
+                // Retrieve stored credentials
+                const storedEmail = localStorage.getItem('email');
+                const storedPassword = localStorage.getItem('password');
+
+                if (email === storedEmail && password === storedPassword) {
+                    document.getElementById("successMsg").innerHTML = "Login successful!";
+                    localStorage.setItem('loggedIn', 'true'); // Set login state
+                    alert("Login successful! Redirecting to main page...");
+
+                    // Redirect to the main page after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'index.html'; // Change this to your main page URL
+                    }, 2000); // 2 seconds delay
+                } else {
+                    document.getElementById("passwordError").innerHTML = "Invalid credentials. Please try again.";
+                }
+            }
+
+            return false; // Prevent the default form submission
+        }
+    </script>
+</body>
+</html>

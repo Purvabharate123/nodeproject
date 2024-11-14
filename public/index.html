@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('loggedIn')) {
+            alert('You need to be logged in to access this page.');
+            window.location.href = 'loginform.html'; // Redirect to login page
+        }
+    </script>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <a class="brand" href="#">Grocery Shop</a>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="#categories"><i class="fas fa-list"></i>Categories</a></li>
+                <li><a href="registrationform.html"><i class="fas fa-sign-in-alt"></i>Registration</a></li>
+                <li><a href="loginform.html"><i class="fas fa-user-plus"></i>Login</a></li> 
+            </ul>
+            <div class="cart-info">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart: <span id="cart-count">0</span> items</span>
+                <span>Total: Rs. <span id="total-price">0</span></span>
+                <button id="payment-button">Pay Now</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner Section -->
+    <header class="banner">
+        <h1>Welcome to the Grocery Shop!</h1>
+        <p>Find the freshest produce and best deals here.</p>
+        <a href="#categories" class="shop-now-btn">Shop Now</a>
+    </header>
+
+    <!-- Categories Section -->
+    <section class="container" id="categories">
+
+        <!-- Fruits Category -->
+        <div class="category">
+            <h2>Fruits</h2>
+            <div class="card">
+                <img src="apple.jpg" alt="Apple">
+                <h5>Apple</h5>
+                <p>Rs.100</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="apple-qty"></label>
+                <button data-product="Apple" data-price="100" data-qty-id="apple-qty">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="banana.jpg" alt="Banana">
+                <h5>Banana</h5>
+                <p>Rs.30</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="banana-qty"></label>
+                <button data-product="Banana" data-price="30" data-qty-id="banana-qty">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="orange.jpg" alt="Orange">
+                <h5>Orange</h5>
+                <p>Rs.80</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="orange-qty"></label>
+                <button data-product="Orange" data-price="80" data-qty-id="orange-qty">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="grapes.jpg" alt="Grapes">
+                <h5>Grapes</h5>
+                <p>Rs.120</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="grapes-qty"></label>
+                <button data-product="Grapes" data-price="120" data-qty-id="grapes-qty">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Dairy Category -->
+        <div class="category">
+            <h2>Dairy</h2>
+            <div class="card">
+                <img src="milk.jpg" alt="Milk">
+                <h5>Milk</h5>
+                <p>Rs.60</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="milk-qty"></label>
+                <button data-product="Milk" data-price="60" data-qty-id="milk-qty">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="chees.jpg" alt="Cheese">
+                <h5>Cheese</h5>
+                <p>Rs.50</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="cheese-qty"></label>
+                <button data-product="Cheese" data-price="50" data-qty-id="cheese-qty">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="butter.jpg" alt="Butter">
+                <h5>Butter</h5>
+                <p>Rs.90</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="butter-qty"></label>
+                <button data-product="Butter" data-price="90" data-qty-id="butter-qty">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="yogurt.jpg" alt="Yogurt">
+                <h5>Yogurt</h5>
+                <p>Rs.40</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="yogurt-qty"></label>
+                <button data-product="Yogurt" data-price="40" data-qty-id="yogurt-qty">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Vegetables Category -->
+        <div class="category">
+            <h2>Vegetables</h2>
+            <div class="card">
+                <img src="broccoli.jpg" alt="Broccoli">
+                <h5>Broccoli</h5>
+                <p>Rs.40</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="broccoli-qty"></label>
+                <button data-product="Broccoli" data-price="40" data-qty-id="broccoli-qty">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="carrot.jpg" alt="Carrot">
+                <h5>Carrot</h5>
+                <p>Rs.50</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="carrot-qty"></label>
+                <button data-product="Carrot" data-price="50" data-qty-id="carrot-qty">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="tomato.jpg" alt="Tomato">
+                <h5>Tomato</h5>
+                <p>Rs.30</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="tomato-qty"></label>
+                <button data-product="Tomato" data-price="30" data-qty-id="tomato-qty">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="potato.jpg" alt="Potato">
+                <h5>Potato</h5>
+                <p>Rs.20</p>
+                <label>Quantity: <input type="number" value="1" min="1" id="potato-qty"></label>
+                <button data-product="Potato" data-price="20" data-qty-id="potato-qty">Add to Cart</button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Grocery Shop. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://www.whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+    </footer>
+
+    <!-- External JS -->
+    <script src="logic.js"></script>
+
+</body>
+</html>
